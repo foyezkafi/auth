@@ -24,6 +24,7 @@ const publicUser = (user) => ({
   gender: user.gender,
   dob: user.dob,
   isVerified: user.isVerified,
+  role: user.role
 });
 
 const appBaseUrl = () => {
@@ -61,7 +62,7 @@ const sendResetMail = async (user, rawToken) => {
 
 const registrationController = async (req, res) => {
   try {
-    const { username, email, password, profilepicture, address, phone, gender, dob } = req.body;
+    const { username, email, password, profilepicture, address, phone, gender, dob, role } = req.body;
 
     if (!username) {
       return res.status(400).json({ success: false, message: "Please enter a username" });
@@ -102,6 +103,7 @@ const registrationController = async (req, res) => {
       phone,
       gender,
       dob,
+      role,
       isVerified: false,
       verificationToken: hashedToken,
       verificationTokenExpires: tokenExpiresAt(24 * 60),

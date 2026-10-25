@@ -2,9 +2,13 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../../controllers/authController");
 const authMiddleware = require("../../middleware/authMiddleware");
+const rateLimiter = require('../../middleware/rateLimiter')
 
-router.post("/registration", authController.registrationController);
-router.post("/login", authController.loginController);
+
+
+
+router.post("/registration",rateLimiter.Registrationlimiter, authController.registrationController);
+router.post("/login",rateLimiter.loginlimiter, authController.loginController);
 router.post("/logout", authMiddleware, authController.logoutController);
 router.get("/verify-email/:token", authController.verifyEmailController);
 router.post("/resend-verification", authController.resendVerificationController);

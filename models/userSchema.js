@@ -33,9 +33,15 @@ const userSchema = new Schema(
     gender: {
       type: String,
       enum: ["male", "female", "others"],
+      default: "male"
     },
     dob: {
       type: String,
+    },
+    role:{
+      type: String,
+      enum: ["admin", "employee", "user"],
+      default: "user"
     },
     isVerified: {
       type: Boolean,
@@ -43,6 +49,7 @@ const userSchema = new Schema(
     },
     verificationToken: {
       type: String,
+      select: false,
     },
     verificationTokenExpires: {
       type: Date,

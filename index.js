@@ -6,10 +6,13 @@ const dns = require("node:dns");
 const dbConnection = require("./configuration/dbConnection.js");
 const routes = require("./routes");
 
+const { error } = require("node:console");
+
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
+
 
 app.use(
   cors({
@@ -24,6 +27,11 @@ app.use(express.urlencoded({ extended: true }));
 dbConnection();
 app.use(routes);
 app.use("/uploads", express.static("uploads"));
+
+
+
+
+
 
 app.get("/", function (req, res) {
   res.send("ERP Application");
